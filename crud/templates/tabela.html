@@ -1,20 +1,71 @@
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col" >Produto</th>
-            <th scope="col">Preco</th>
-            <th scope="col">Ação</th>
-        </tr>
-    </thead> 
-    {% for db in produtos %}
-    <tbody>
-        <th scope="row">{{db.id}}</th>
-        <th scope="row">{{db.nome }}</th>
-        <th scope="row">{{db.preco}}</th>
-        <th scope="row">
-            <a class="btn btn-warning" href="{% url 'alterarproduto' db.id %}">editar</a>
-            <a class="btn btn-danger" href="{% url 'deletarproduto' db.id %}">deletar</a></th>
-    </tbody>    
-    {% endfor %}
-</table>   
+{% block corpo %}
+
+     <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col" >Produto</th>
+                <th scope="col">Preco</th>
+                <th scope="col">Ação</th>
+            </tr>
+        </thead> 
+        {% for db in page_obj %}
+        <tbody>
+            <th scope="row"><img  src="{{db.icon.url}}" alt=""  width="50px" height="50px"/> </th>
+            <th scope="row">{{db.nome }}</th>
+            <th scope="row">{{db.preco}}</th>
+            <th scope="row">
+                <a class="btn btn-warning" href="{% url 'alterarproduto' db.id %}">editar</a>
+                <a class="btn btn-danger" href="{% url 'deletarproduto' db.id %}">deletar</a></th>
+        </tbody>    
+        {% endfor %}
+    </table>  
+        {% if  is_paginated %}
+        <nav aria-label="nagecap-paginacao" >
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{page.obj.previous_page_number}}"class="page-link">
+                            &laquo; 
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link">&laquo;</a>
+                    </li>
+                {% endif %}
+
+                {% for num in paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <a href="#" class="page-link">
+                                {{num}}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a href="?page={{num}}" class="page-link">
+                                {{num}}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                        <li  class="page-item">
+                            <a href="?page={{page_obj.next_page_number}}" class="page-link">
+                                &raquo;
+                            </a>
+                        </li>
+                {% else %}
+                        <li class="page-item disabled">
+                            <a href="#" class="page-link">
+                                &raquo;
+                            </a>
+                        </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+  
+{% endblock corpo %}

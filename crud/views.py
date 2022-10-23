@@ -13,19 +13,21 @@ from .models import Produto
 class IndexView(LoginRequiredMixin , ListView):
     models = Produto
     template_name = 'index.html'
+    paginate_by = 3
+    ordering = 'id' 
     queryset = Produto.objects.all()
-    context_object_name = 'produtos'
+    
 
 class CreateProdutoView(LoginRequiredMixin, CreateView):
     model= Produto
     template_name = 'produto_form.html'
-    fields = ['nome' , 'preco']
+    fields = ['nome' , 'preco' , 'descricao' , 'icon']
     success_url = reverse_lazy('index')
 
 class UpdateProdutoView( LoginRequiredMixin , UpdateView):
     model = Produto 
     template_name = 'produto_form.html'
-    fields = ['nome' , 'preco']
+    fields = ['nome' , 'preco' , 'descricao' , 'icon']
     success_url = reverse_lazy('index')
 
 class DeleteProdutoView( LoginRequiredMixin, DeleteView):
