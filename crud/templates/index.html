@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% block title %}
+    <title>Inicio</title>
+{% endblock title %}
+
+{% block corpo %}
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+            <h4 class="text-crenter ">Bem vindo {{user.usename}}</h4>
+            <div class="container row">
+                <a href="{% url 'meuperfil' %}" class="mr-2" >    
+                    <button class="btn btn-success">Ver Perfil</button>
+                </a>
+                <a href="{% url 'novoproduto' %}">
+                    <button class="btn btn-primary">Cadastrar Produto</button>
+                </a>
+                
+            </div>
+            
+        </div>
+        {% include 'tabela.html' %}
+    </div>  
+
+{% endblock corpo%}

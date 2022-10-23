@@ -1,0 +1,20 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col" >Produto</th>
+            <th scope="col">Preco</th>
+            <th scope="col">Ação</th>
+        </tr>
+    </thead> 
+    {% for db in produtos %}
+    <tbody>
+        <th scope="row">{{db.id}}</th>
+        <th scope="row">{{db.nome }}</th>
+        <th scope="row">{{db.preco}}</th>
+        <th scope="row">
+            <a class="btn btn-warning" href="{% url 'alterarproduto' db.id %}">editar</a>
+            <a class="btn btn-danger" href="{% url 'deletarproduto' db.id %}">deletar</a></th>
+    </tbody>    
+    {% endfor %}
+</table>   
