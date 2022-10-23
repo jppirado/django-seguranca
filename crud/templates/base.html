@@ -1,0 +1,31 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{%  static 'css/style.css' %}" />
+    {% block title %}
+        <title></title>
+    {% endblock title %}
+</head>
+<body>
+    <div class="container-fluid">
+         <div>
+            {% block header %}
+            <h1 class="text-white text-center">Lista Centro</h1>
+            {%  endblock header %}
+            <div class="card p-5">
+                {% block corpo %}
+
+                {% endblock corpo%}
+            </div> 
+        </div>
+    </div>    
+    {% bootstrap_javascript jquery='full' %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% block title %}
+    <title>Deletar  {{object}} </title>
+{% endblock %}
+
+{%  block corpo %}
+    <form method="post">
+        {% csrf_token%}
+        <p>Tem certeza que deseja deletar o produto <strong>{{object}}</strong>? </p>
+        <button type="submit"  class="btn btn-danger">Sim</button>
+        <a href="{% url 'index' %}">
+            <button type="button" class="btn btn-success" > Não</button>
+        </a>
+    </form>
+
+{% endblock corpo %}

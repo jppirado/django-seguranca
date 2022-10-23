@@ -19,6 +19,9 @@
                     <p>Profile: <a href="{{a.extra_data.profile_url}}">Link </a></p>
                 </div>
                 <div class="col-sm-12 mt-2 text-center">
+                    <button class="btn btn-success"><a href="{% url 'index'%}">Voltar</a></button>
+                </div>
+                <div class="col-sm-12 mt-2 text-center">
                     <button class="btn btn-warning"><a href="{% url 'logout'%}">Sair</a></button>
                 </div>
             {% endif %}

@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% block header %}
+{% endblock header%}
+<h1>Cadastre o Produto</h1>
+{% block corpo %}
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+    
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button class="btn btn-success" type="submit">Salvar</button>
+            <button class="btn btn-warning" type="submit"><a href="{% url 'index'%}">Cancelar</a></button>
+        {% endbuttons %}
+    </form>
+</div>
+{% endblock corpo%}
