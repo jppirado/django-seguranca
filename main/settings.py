@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'bootstrap4',
+    'social_django',
 ]
 
 
@@ -64,6 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -123,3 +127,53 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os 
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join( BASE_DIR, 'staticfiles' )
+MEDIA_ROOT = os.path.join( BASE_DIR , 'media')
+
+SECURE_HSTS_SECONDS = True  
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True 
+SECURE_CONTENT_TYPES_NOSNIFF = True 
+SECURE_BROWSER_XSS_FILTER = True 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE  = True
+CSRF_COOKIE_HTTPONLY = True
+X_FRAME_OPTIONS = 'DENY'
+
+#Não roda localmente 
+# SECURE_SSL_REDIRECT = True
+
+AUTHENTICATION_BACKENDS = {
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+}
+
+LOGIN_URL = 'login' 
+LOGIN_REDIRECT_URL = 'index'
+LOGOU_URL = 'logout' 
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+
+SOCIAL_AUTH_FACEBOOK_SCOPE =  ['email' , 'user_link' ]
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields' : 'id, name, email, picture.type(large), link '
+}
+
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA =[
+    ('name', 'name'),
+    ('email' , 'email'),
+    ('picture' , 'picture'),
+    ('link' , 'profile_url'),
+]
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    print('Não foi possível carregar as configurações locais!')
+
