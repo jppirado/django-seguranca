@@ -24,3 +24,8 @@ urlpatterns = [
     path('' , include('core.urls')), 
     path('' , include('crud.urls')),
 ] +  static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.AdminSite.site_header  = 'Sistema Teste'
+admin.AdminSite.site_title = 'João Lindo'
+admin.AdminSite.index_title =  'Essse é o melhor sistema do brasil '
